@@ -17,11 +17,13 @@ public class SqlTemplete {
 	private final static Pattern PTN_IFNULL = Pattern.compile("<if[\\s]*test[\\s]*=[\\s]*\"([^\"]*)\"[\\s]*>[\\s]*(.*)[\\s]*</if>");
 	private final static Pattern PTN_GENERAL = Pattern.compile("\\$\\{([^}]*)\\}");
 	private final static Pattern PTN_LOGICAL = Pattern.compile("(\\$\\{[^}]*\\})[\\s]*(==|>=|<=|>|<|\\^=|\\$=|~~|!=)([^\"]*)");
+	private final static Pattern EXCLUDE_AND_LOGICAL = Pattern.compile("where[\\s]*and");
 	
 	public static String parse(String sql,Map map) throws Exception{
 		sql = sql.replaceAll("--.*", "");
 		sql = replaceIf(sql,map);
 		sql = replaceGeneral(sql,map);
+		sql = replaceFirstAnd(sql);
 		return sql;
 	}
 	
@@ -143,9 +145,16 @@ public class SqlTemplete {
 		return rst;
 	}
 
-	/***
-	 * 按照值的类型赋值，目前支持字符串类型、List 类型
-	 */
+
+	private static String replaceFirstAnd(String content){
+		Matcher mac = EXCLUDE_AND_LOGICAL.matcher(content);
+		while(mac.find()){
+			mac.reset(mac.replaceFirst(" where "));
+		}
+		return mac.appendTail(new StringBuffer()).toString();
+	}
+
+
 	private static String valByType(Map map,String key){
 		Object val = map.get(key);
 		if(val instanceof List){

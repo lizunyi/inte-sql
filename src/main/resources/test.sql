@@ -1,7 +1,7 @@
 select * from trip_train_order_train where 
 
 <if test="${id1}"> 
-	and train_code == ${train_code2} and a = ${train_code2} and o in ${ids}
+	and train_code = ${train_code2} and a = ${train_code2} and o in ${ids}
 </if>
 <if test="${id2aa}== 1"> 
 	and train_code > 1 
