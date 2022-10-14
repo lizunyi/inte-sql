@@ -173,12 +173,7 @@ public class SqlTemplete {
 			sb.append(")");
 			return sb.toString();
 		} else {
-			if (val instanceof Number) {
-				return StringUtils.ifNull(val).trim();
-			} else if (val instanceof String) {
-				return "'" + StringUtils.ifNull(val).trim() + "'";
-			}
+			return StringUtils.ifNull(val).trim();
 		}
-		return StringUtils.ifNull(val).trim();
 	}
 }
