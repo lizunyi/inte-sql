@@ -154,10 +154,9 @@ public class SqlTemplete {
 		return mac.appendTail(new StringBuffer()).toString();
 	}
 
-
-	private static String valByType(Map map,String key){
+	private static String valByType(Map map, String key) {
 		Object val = map.get(key);
-		if(val instanceof List){
+		if (val instanceof List) {
 			StringBuilder sb = new StringBuilder();
 			List lst = (List) val;
 			Object o = null;
@@ -165,16 +164,21 @@ public class SqlTemplete {
 			for (int i = 0; i < lst.size(); i++) {
 				sb.append(i == 0 ? "" : ",");
 				o = lst.get(i);
-				if(o instanceof Number){
+				if (o instanceof Number) {
 					sb.append(StringUtils.ifNull(o).trim());
-				}else{
-					sb.append("'"+StringUtils.ifNull(o).trim()+"'");
+				} else {
+					sb.append("'" + StringUtils.ifNull(o).trim() + "'");
 				}
 			}
 			sb.append(")");
 			return sb.toString();
-		}else{
-			return StringUtils.ifNull(val).trim();
+		} else {
+			if (val instanceof Number) {
+				return StringUtils.ifNull(val).trim();
+			} else if (val instanceof String) {
+				return "'" + StringUtils.ifNull(val).trim() + "'";
+			}
 		}
+		return StringUtils.ifNull(val).trim();
 	}
 }
