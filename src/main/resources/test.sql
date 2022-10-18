@@ -22,5 +22,3 @@ select * from trip_train_order_train where
 <if test="${id8} ~~ 1"> 
 	and train_code ~~ 1 
 </if>
-
-aa=${id2}
