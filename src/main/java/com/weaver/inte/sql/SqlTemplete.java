@@ -130,12 +130,15 @@ public class SqlTemplete {
             left = ifNull(map.get(leftKey)).trim();
         }
 
+        if (isNotNull(right)) {
+            right = trimBefore(right, "'");
+            right = trimAfter(right, "'");
+        }
+
         if (isNotNull(right) && PTN_GENERAL.matcher(right).find()) {
             String[] taskExpArr = regex(PTN_GENERAL, right, 1);
             String leftKey = taskExpArr[1];
             right = ifNull(map.get(leftKey)).trim();
-            right = trimBefore(right, "'");
-            right = trimAfter(right, "'");
         }
 
         if (isNull(left) && isNull(right) && isNull(op)) {

@@ -38,21 +38,21 @@ public class SqlParseTest {
                 " cnt  " +
                 " limit 0, 10";
         String sql2 = "select b.order_id,b.cnt,b.uuid as uid  from (  " +
-                "SELECT  " +
-                "  order_id,  " +
-                "  count( 1 ) cnt,  " +
-                "  uuid AS uuid,  " +
-                "  order_type AS orderType,  " +
+                "SELECT " +
+                "  order_id, " +
+                "  count( 1 ) cnt, " +
+                "  uuid AS uuid, " +
+                "  order_type AS orderType, " +
                 "  order_id AS orderId,  " +
-                "  apply_tui_id AS applyTuiId   " +
-                "FROM  " +
-                "  fin_hotel_detail_data   " +
-                "GROUP BY  " +
-                "  order_id   " +
+                "  apply_tui_id AS applyTuiId " +
+                "FROM " +
+                "  fin_hotel_detail_data " +
+                "GROUP BY " +
+                "  order_id " +
                 "HAVING  " +
-                "  count( 1 ) > 10   " +
-                "ORDER BY  " +
-                "  count( 1 ) DESC   " +
+                " count( 1 ) > 10 " +
+                " ORDER BY " +
+                "  count( 1 ) DESC " +
                 "  LIMIT 0,  " +
                 "  10  " +
                 "  ) b";

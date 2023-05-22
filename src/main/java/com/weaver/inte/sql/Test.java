@@ -32,7 +32,7 @@ public class Test {
 				" else supplier_type\n" +
 				"end) as label,count(1) as count from hh_hotel_order\n" +
 				"where length(supplier_type) > 0\n" +
-				"<if test=\"${startDate}\">\n" +
+				"<if test=\"${importOrderBy} == ''\">\n" +
 				"\tand booking_date >= '${startDate}' and booking_date <= '${endDate}'\n" +
 				"</if>\n" +
 				"<if test=\"${companyId} && ${companyId2}\">\n" +
